@@ -8,6 +8,8 @@ def main(
     type: str = typer.Argument(None, help="Het type project"),
     name: str = typer.Argument(None, help="Project name"),
 ):
+    os.system("cd ~")
+    os.system("cd Documents")
     if command == "make":
         if not name:
             typer.echo("Error: --name is required for 'make' command.")
@@ -15,6 +17,12 @@ def main(
         if type == "js":
             os.system("mkdir " + name)
             os.system("cd " + name + " && npm init -y")
+            os.system("git init")
+        elif type == "ts":
+            os.system("mkdir " + name)
+            os.system("cd " + name + " && npm init -y")
+            os.system("npm install typescript --save-dev")
+            os.system("npx tsc --init")
             os.system("git init")
         elif type == "python":
             os.system("mkdir " + name)
