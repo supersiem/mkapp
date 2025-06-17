@@ -7,7 +7,7 @@ def main(
     url: str = typer.Option(None, help="URL for cloning a project"),
     type: str = typer.Option(None, help="Het type project"),
     name: str = typer.Option(None, help="Project name"),
-    openInVSCode: bool = typer.Option(
+    vscode: bool = typer.Option(
         False, help="Open the project in VS Code after creation"
     ),
 ):
@@ -40,7 +40,7 @@ def main(
             os.system(
                 "git submodule add https://github.com/supersiem/custom_framework.git"
             )
-        if openInVSCode:
+        if vscode:
             os.system("code .")
     elif command == "clone":
         os.chdir(os.path.expanduser("~/Documents"))
