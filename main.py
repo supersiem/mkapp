@@ -49,7 +49,7 @@ def main(
             raise typer.Exit(code=1)
         os.system("git clone " + url)
     elif command == "commit":
-        os.system(f"git add . && git commit -m '{name}'")
+        os.system(f"git add . && git commit -m '{name}' && git push")
 
 
 # voer uit als het script direct wordt uitgevoerd
