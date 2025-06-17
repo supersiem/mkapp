@@ -7,9 +7,12 @@ def main(
     url: str = typer.Option(None, help="URL for cloning a project"),
     type: str = typer.Option(None, help="Het type project"),
     name: str = typer.Option(None, help="Project name"),
+    openInVSCode: bool = typer.Option(
+        False, help="Open the project in VS Code after creation"
+    ),
 ):
-    os.chdir(os.path.expanduser("~/Documents"))
     if command == "make":
+        os.chdir(os.path.expanduser("~/Documents"))
         if not name:
             typer.echo("Error: --name is required for 'make' command.")
             raise typer.Exit(code=1)
@@ -37,11 +40,16 @@ def main(
             os.system(
                 "git submodule add https://github.com/supersiem/custom_framework.git"
             )
+        if openInVSCode:
+            os.system("code .")
     elif command == "clone":
+        os.chdir(os.path.expanduser("~/Documents"))
         if not url:
             typer.echo("Error: --url is required for 'clone' command.")
             raise typer.Exit(code=1)
         os.system("git clone " + url)
+    elif command == "commit":
+        os.system(f"git add . && git commit -m '{name}'")
 
 
 if __name__ == "__main__":
