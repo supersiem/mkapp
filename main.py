@@ -4,33 +4,35 @@ import typer
 
 def main(
     command: str,
-    url: str = typer.Argument(None, help="URL for cloning a project"),
-    type: str = typer.Argument(None, help="Het type project"),
-    name: str = typer.Argument(None, help="Project name"),
+    url: str = typer.Option(None, help="URL for cloning a project"),
+    type: str = typer.Option(None, help="Het type project"),
+    name: str = typer.Option(None, help="Project name"),
 ):
-    os.system("cd ~")
-    os.system("cd Documents")
+    os.chdir(os.path.expanduser("~/Documents"))
     if command == "make":
         if not name:
             typer.echo("Error: --name is required for 'make' command.")
             raise typer.Exit(code=1)
         if type == "js":
             os.system("mkdir " + name)
-            os.system("cd " + name + " && npm init -y")
+            os.chdir(name)
+            os.system("npm init -y")
             os.system("git init")
         elif type == "ts":
             os.system("mkdir " + name)
-            os.system("cd " + name + " && npm init -y")
+            os.chdir(name)
+            os.system("npm init -y")
             os.system("npm install typescript --save-dev")
             os.system("npx tsc --init")
             os.system("git init")
         elif type == "python":
             os.system("mkdir " + name)
-            os.system("cd " + name + " && python -m venv venv")
+            os.chdir(name)
+            os.system("python -m venv venv")
             os.system("git init")
         elif type == "cf":
             os.system("mkdir " + name)
-            os.system("cd " + name)
+            os.chdir(name)
             os.system("git init")
             os.system(
                 "git submodule add https://github.com/supersiem/custom_framework.git"
