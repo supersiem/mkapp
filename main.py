@@ -52,5 +52,7 @@ def main(
         os.system(f"git add . && git commit -m '{name}'")
 
 
+# voer uit als het script direct wordt uitgevoerd
+# (niet als het wordt geïmporteerd als module)
 if __name__ == "__main__":
     typer.run(main)
